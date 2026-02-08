@@ -11,6 +11,7 @@ body {
     animation: gradient 10s ease infinite;
     text-align:center;
     color:white;
+    overflow-x:hidden;
 }
 
 @keyframes gradient {
@@ -20,9 +21,8 @@ body {
 }
 
 h1{
-    margin-top:40px;
+    margin-top:30px;
     font-size:42px;
-    animation: fadeIn 2s ease-in-out;
 }
 
 p{
@@ -32,9 +32,49 @@ p{
     line-height:1.6;
 }
 
-@keyframes fadeIn{
-    from{opacity:0}
-    to{opacity:1}
+/* Cake Design */
+.cake{
+    position:relative;
+    margin:40px auto;
+    width:200px;
+}
+
+.layer{
+    height:60px;
+    background:#ffccd5;
+    border-radius:10px;
+    margin-bottom:5px;
+}
+
+.layer:nth-child(2){ background:#ffb3c1; }
+.layer:nth-child(3){ background:#ff8fab; }
+
+.candle{
+    width:10px;
+    height:40px;
+    background:white;
+    position:absolute;
+    top:-40px;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:3px;
+}
+
+.flame{
+    width:12px;
+    height:20px;
+    background:orange;
+    border-radius:50%;
+    position:absolute;
+    top:-20px;
+    left:50%;
+    transform:translateX(-50%);
+    animation:flicker 0.3s infinite alternate;
+}
+
+@keyframes flicker{
+    from{ transform:translateX(-50%) scale(1); opacity:1; }
+    to{ transform:translateX(-50%) scale(1.2); opacity:0.7; }
 }
 
 .slideshow{
@@ -93,18 +133,21 @@ button:hover{
 }
 
 </style></head>
-<body><h1>Happy Birthday My Queen 👑❤️</h1><p>
-From the day you came into my life, everything became more beautiful. 
-Your smile is my happiness, your voice is my favorite sound, 
-and your love is my greatest blessing. 💕
-<br><br>
-Today is all about you. May your dreams come true and 
-may our love grow stronger every single day. ✨
+<body><h1>Happy Birthday My Queen 👑❤️</h1><div class="cake">
+    <div class="candle">
+        <div class="flame"></div>
+    </div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+</div><p>
+You are the sweetest part of my life. 
+Like this cake, may your life be full of sweetness and happiness. 🎂💕
 </p><div class="slideshow">
     <img src="photo1.jpg" class="slide">
     <img src="photo2.jpg" class="slide">
     <img src="photo3.jpg" class="slide">
-</div><button onclick="showMessage()">Click For Special Surprise 🎁</button>
+</div><button onclick="blowCandle()">Blow The Candle 🎂✨</button>
 
 <div class="footer">
 Made with endless love ❤️ by Your Love
@@ -121,13 +164,13 @@ function showSlides(){
     slides[index].style.opacity=1;
     index=(index+1)%slides.length;
 }
-
 setInterval(showSlides,2000);
 showSlides();
 
-// Surprise message
-function showMessage(){
-    alert("I Love You More Than Words Can Say ❤️ Happy Birthday My Love!");
+// Blow candle
+function blowCandle(){
+    document.querySelector('.flame').style.display='none';
+    alert("Make a wish my love ❤️✨");
 }
 
 // Falling hearts
@@ -140,7 +183,6 @@ function createHeart(){
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),5000);
 }
-
 setInterval(createHeart,300);
 
 </script></body>
