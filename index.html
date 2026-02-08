@@ -2,158 +2,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday My Love ❤️</title><style>
+<title>Dubai Birthday Surprise ❤️</title><style>
 body {
     margin:0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg,#ff758c,#ff7eb3,#ffb199);
-    background-size:400% 400%;
-    animation: gradient 10s ease infinite;
+    background: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
     text-align:center;
     color:white;
     overflow:hidden;
 }
 
-@keyframes gradient {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+body::after{
+    content:"";
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.5);
+    z-index:-1;
 }
 
-h1{ margin-top:30px; font-size:42px; }
-
-.cakes{
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    flex-wrap:wrap;
-    margin-top:40px;
-}
-
-.cake{ position:relative; width:250px; }
-
-.layer{ height:70px; border-radius:15px; margin-bottom:8px; }
-.layer1{ background:#ffccd5; }
-.layer2{ background:#ffb3c1; }
-.layer3{ background:#ff8fab; }
-
-.candle{
-    width:14px;
-    height:50px;
-    background:white;
-    position:absolute;
-    top:-50px;
-    left:50%;
-    transform:translateX(-50%);
-    border-radius:4px;
-}
-
-.flame{
-    width:16px;
-    height:25px;
-    background:orange;
-    border-radius:50%;
-    position:absolute;
-    top:-25px;
-    left:50%;
-    transform:translateX(-50%);
-    animation:flicker 0.3s infinite alternate;
-}
-
-@keyframes flicker{
-    from{ transform:translateX(-50%) scale(1); opacity:1; }
-    to{ transform:translateX(-50%) scale(1.2); opacity:0.7; }
-}
+h1{ margin-top:40px; font-size:45px; }
+h2{ font-weight:normal; }
 
 button{
     margin-top:40px;
-    padding:14px 30px;
+    padding:15px 30px;
     font-size:18px;
     border:none;
     border-radius:30px;
-    background:white;
-    color:#ff4b5c;
+    background:gold;
+    color:black;
     cursor:pointer;
 }
 
-button:hover{ background:#ffe6ea; }
+button:hover{ background:orange; }
 
-/* Confetti */
-.confetti{
+.firework{
     position:fixed;
-    width:10px;
-    height:10px;
-    top:0;
-    animation:fall linear forwards;
+    width:6px;
+    height:6px;
+    border-radius:50%;
 }
 
-@keyframes fall{
+@keyframes explode{
     to{
-        transform:translateY(100vh) rotate(720deg);
+        transform:translate(var(--x), var(--y));
         opacity:0;
     }
 }
 
-.heart{
-    position:fixed;
-    top:-10px;
-    font-size:20px;
-    animation:fall linear forwards;
-}
-
 </style></head>
-<body><h1>Happy Birthday My Queen 👑❤️</h1><div class="cakes"><div class="cake">
-    <div class="candle"><div class="flame"></div></div>
-    <div class="layer layer1"></div>
-    <div class="layer layer2"></div>
-    <div class="layer layer3"></div>
-</div>
-
-<div class="cake">
-    <div class="candle"><div class="flame"></div></div>
-    <div class="layer layer3"></div>
-    <div class="layer layer1"></div>
-    <div class="layer layer2"></div>
-</div>
-
-<div class="cake">
-    <div class="candle"><div class="flame"></div></div>
-    <div class="layer layer2"></div>
-    <div class="layer layer3"></div>
-    <div class="layer layer1"></div>
-</div>
-
-</div><button onclick="celebrate()">Blow All Candles 🎂✨</button>
+<body><h1>Happy Birthday My Queen 👑❤️</h1>
+<h2>Even Dubai is shining for you tonight ✨🌆</h2><button onclick="celebrate()">Celebrate in Dubai 🎆</button>
 
 <script>
 function celebrate(){
-    document.querySelectorAll('.flame').forEach(f=>f.style.display='none');
-    launchConfetti();
-    alert("Happy Birthday My Love ❤️✨ Make a Big Wish!");
+    launchFireworks();
+    alert("One day we will celebrate your birthday in Dubai together ❤️✨");
 }
 
-function launchConfetti(){
-    const colors=['#ff0','#ff4b5c','#00f','#0f0','#fff','#ffa500'];
-    for(let i=0;i<150;i++){
-        const conf=document.createElement('div');
-        conf.classList.add('confetti');
-        conf.style.left=Math.random()*100+'vw';
-        conf.style.background=colors[Math.floor(Math.random()*colors.length)];
-        conf.style.animationDuration=(Math.random()*3+2)+'s';
-        document.body.appendChild(conf);
-        setTimeout(()=>conf.remove(),5000);
+function launchFireworks(){
+    for(let i=0;i<5;i++){
+        setTimeout(()=>{
+            createExplosion(Math.random()*window.innerWidth, Math.random()*window.innerHeight/2);
+        }, i*800);
     }
 }
 
-function createHeart(){
-    const heart=document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML='❤️';
-    heart.style.left=Math.random()*100+'vw';
-    heart.style.animationDuration=(Math.random()*3+2)+'s';
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),5000);
+function createExplosion(x,y){
+    const colors=['#ff0','#ff4b5c','#00f','#0f0','#fff','#ffa500','gold'];
+    for(let i=0;i<40;i++){
+        const particle=document.createElement('div');
+        particle.classList.add('firework');
+        particle.style.background=colors[Math.floor(Math.random()*colors.length)];
+        particle.style.left=x+'px';
+        particle.style.top=y+'px';
+        const angle=Math.random()*2*Math.PI;
+        const distance=Math.random()*150+50;
+        const xMove=Math.cos(angle)*distance+'px';
+        const yMove=Math.sin(angle)*distance+'px';
+        particle.style.setProperty('--x',xMove);
+        particle.style.setProperty('--y',yMove);
+        particle.style.animation='explode 1s forwards';
+        document.body.appendChild(particle);
+        setTimeout(()=>particle.remove(),1000);
+    }
 }
-setInterval(createHeart,400);
 </script></body>
 </html>
